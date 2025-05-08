@@ -1,93 +1,100 @@
-/*import "./style.css";
+import "./style.css";
+import { obtenerTodosPersonajes, buscarPersonajes, Personaje } from "./api/personajesAPI";
 
-interface Personaje {
-    id: string;
-    nombre: string;
-    apodo: string;
-    especialidad: string;
-    habilidades: string[];
-    imagen: string;
-    amigo: string;
-}
+// Configuración inicial
+const API_DELAY = 300; // ms
+let searchTimeout: ReturnType<typeof setTimeout> | null = null;
+let abortController: AbortController | null = null;
 
+// Elementos del DOM
 const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-const resultsDiv = document.getElementById('results') as HTMLDivElement;
-const loading = document.getElementById('loading') as HTMLDivElement;
-const errorDiv = document.getElementById('error') as HTMLDivElement;
+const resultsContainer = document.getElementById('results') as HTMLDivElement;
+const loadingIndicator = document.getElementById('loading') as HTMLDivElement;
+const errorDisplay = document.getElementById('error') as HTMLDivElement;
 
-let timeoutId: ReturnType<typeof setTimeout> | null = null;
-let controller: AbortController | null = null;
+// Eventos
+window.addEventListener('DOMContentLoaded', iniciarAplicacion);
+searchInput.addEventListener('input', manejarBusqueda);
 
-// Cargar todos los personajes al iniciar
-window.addEventListener('DOMContentLoaded', () => {
-    buscarPersonajes('');
-});
-
-async function cargarTodosPersonajes(): Promise<Personaje[]> {
+async function iniciarAplicacion(): Promise<void> {
     try {
-        const response = await fetch('http://localhost:3000/personajes');
-        if (!response.ok) throw new Error('Error al cargar personajes');
-        return await response.json();
+        mostrarLoading();
+        const personajes = await obtenerTodosPersonajes();
+        mostrarResultados(personajes);
     } catch (error) {
-        if (error instanceof Error) {
-            errorDiv.textContent = `Error: ${error.message}`;
-            errorDiv.style.display = 'block';
-        }
-        return [];
-    }
-}
-
-function filtrarPersonajes(personajes: Personaje[], query: string): Personaje[] {
-    const busqueda = query.toLowerCase();
-    return personajes.filter(personaje => 
-        personaje.nombre.toLowerCase().includes(busqueda) ||
-        personaje.apodo.toLowerCase().includes(busqueda) ||
-        personaje.habilidades.some(h => h.toLowerCase().includes(busqueda)) ||
-        personaje.especialidad.toLowerCase().includes(busqueda)
-    );
-}
-
-async function buscarPersonajes(query: string): Promise<void> {
-    try {
-        loading.style.display = 'block';
-        errorDiv.style.display = 'none';
-        
-        const todosPersonajes = await cargarTodosPersonajes();
-        const resultados = query ? filtrarPersonajes(todosPersonajes, query) : todosPersonajes;
-        
-        mostrarResultados(resultados);
-    } catch (error) {
-        if (error instanceof Error) {
-            errorDiv.textContent = `Error: ${error.message}`;
-            errorDiv.style.display = 'block';
-        }
+        manejarError(error);
     } finally {
-        loading.style.display = 'none';
+        ocultarLoading();
     }
+}
+
+async function manejarBusqueda(event: Event): Promise<void> {
+    const query = (event.target as HTMLInputElement).value.trim();
+    
+    // Cancelar petición anterior
+    if (abortController) {
+        abortController.abort();
+    }
+    abortController = new AbortController();
+    
+    // Limpiar timeout anterior
+    if (searchTimeout) clearTimeout(searchTimeout);
+    
+    searchTimeout = setTimeout(async () => {
+        try {
+            if (!query) {
+                const todos = await obtenerTodosPersonajes(abortController?.signal);
+                return mostrarResultados(todos);
+            }
+            
+            mostrarLoading();
+            const resultados = await buscarPersonajes(query, abortController?.signal);
+            mostrarResultados(resultados);
+            
+        } catch (error) {
+            if ((error as Error).name !== 'AbortError') {
+                manejarError(error);
+            }
+        } finally {
+            ocultarLoading();
+        }
+    }, API_DELAY);
 }
 
 function mostrarResultados(personajes: Personaje[]): void {
-    resultsDiv.innerHTML = personajes.length > 0 
+    resultsContainer.innerHTML = personajes.length > 0
         ? personajes.map(personaje => `
             <div class="character-card">
                 <img src="./images/${personaje.imagen}" alt="${personaje.nombre}">
-                <h3>${personaje.nombre}${personaje.apodo ? ` (${personaje.apodo})` : ''}</h3>
-                <p><strong>Especialidad:</strong> ${personaje.especialidad}</p>
-                <p><strong>Habilidades:</strong> ${personaje.habilidades.join(', ')}</p>
-                ${personaje.amigo ? `<p><strong>Compañero:</strong> ${personaje.amigo}</p>` : ''}
+                <div class="character-info">
+                    <h3>${personaje.nombre}${personaje.apodo ? `<small>${personaje.apodo}</small>` : ''}</h3>
+                    <p><strong>Especialidad:</strong> ${personaje.especialidad}</p>
+                    <p><strong>Habilidades:</strong> ${personaje.habilidades.join(', ')}</p>
+                    ${personaje.amigo ? `<p><strong>Aliado:</strong> ${personaje.amigo}</p>` : ''}
+                </div>
             </div>
         `).join('')
-        : '<p class="error-message">No se encontraron resultados</p>';
+        : '<p class="no-results">No se encontraron agentes</p>';
 }
 
-searchInput.addEventListener('input', () => {
-    const query = searchInput.value.trim();
+function manejarError(error: unknown): void {
+    const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Ocurrió un error desconocido';
     
-    if (timeoutId) clearTimeout(timeoutId);
+    errorDisplay.textContent = errorMessage;
+    errorDisplay.style.display = 'block';
     
-    timeoutId = setTimeout(() => {
-        buscarPersonajes(query);
-    }, 300);
-});
+    setTimeout(() => {
+        errorDisplay.style.display = 'none';
+    }, 5000);
+}
 
-*/
+function mostrarLoading(): void {
+    loadingIndicator.style.display = 'block';
+    resultsContainer.innerHTML = '';
+}
+
+function ocultarLoading(): void {
+    loadingIndicator.style.display = 'none';
+}
