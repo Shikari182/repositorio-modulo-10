@@ -31,13 +31,13 @@ async function iniciarAplicacion(): Promise<void> {
 async function manejarBusqueda(event: Event): Promise<void> {
     const query = (event.target as HTMLInputElement).value.trim();
     
-    // Cancelar petición anterior
+
     if (abortController) {
         abortController.abort();
     }
     abortController = new AbortController();
     
-    // Limpiar timeout anterior
+
     if (searchTimeout) clearTimeout(searchTimeout);
     
     searchTimeout = setTimeout(async () => {

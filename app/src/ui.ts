@@ -19,7 +19,7 @@ export function inicializarUI(
     if (!(loading instanceof HTMLDivElement)) throw new Error('Elemento loading no válido');
     if (!(errorDiv instanceof HTMLDivElement)) throw new Error('Elemento error no válido');
 
-    // Configurar event listeners
+    // Event listeners
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
     
     searchInput.addEventListener('input', () => {
