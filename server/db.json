@@ -3,7 +3,7 @@
     {
       "id": "1",
       "nombre": "Mortadelo",
-      "apodo": "Mortadelo",
+      "apodo": " (Mortadelo) ",
       "especialidad": "Disfraces",
       "habilidades": ["Camuflaje", "Imitaciones", "Huida rápida"],
       "amigo": "Filemón",
@@ -12,7 +12,7 @@
     {
       "id": "2",
       "nombre": "Filemón",
-      "apodo": "Filemón",
+      "apodo": " (Filemón) ",
       "especialidad": "Ingeniería improvisada",
       "habilidades": ["Inventor", "Construcción rápida", "Cálculos mentales"],
       "amigo": "Mortadelo",
@@ -21,7 +21,7 @@
     {
       "id": "3",
       "nombre": "Ofelia",
-      "apodo": "Ofelia",
+      "apodo": " (Ofelia) ",
       "especialidad": "Inteligencia",
       "habilidades": ["Investigación", "Hacker", "Descifrado de códigos"],
       "amigo": "Rompetechos",
@@ -30,7 +30,7 @@
     {
       "id": "4",
       "nombre": "Bacterio",
-      "apodo": "Bacterio",
+      "apodo": " (Bacterio) ",
       "especialidad": "Inventor loco",
       "habilidades": [
         "Creación de inventos disparatados",
@@ -42,7 +42,7 @@
     {
       "id": "5",
       "nombre": "Rompetechos",
-      "apodo": "Rompetechos",
+      "apodo": " (Rompetechos) ",
       "especialidad": "Desastre andante",
       "habilidades": [
         "Despiste total",
@@ -55,7 +55,7 @@
     {
       "id": "6",
       "nombre": "Superintendente Vicente",
-      "apodo": "Super",
+      "apodo": " (Super) ",
       "especialidad": "Liderazgo",
       "habilidades": [
         "Organización",
@@ -68,7 +68,7 @@
     {
       "id": "7",
       "nombre": "Señorita Irma",
-      "apodo": "Irma",
+      "apodo": " (Irma) ",
       "especialidad": "Agente encubierta",
       "habilidades": ["Cambios de apariencia", "Seducción", "Manejo de armas"],
       "amigo": "",
@@ -77,7 +77,7 @@
     {
       "id": "8",
       "nombre": "Director General de la T.I.A.",
-      "apodo": "Director",
+      "apodo": " (Director) ",
       "especialidad": "Gestión estratégica",
       "habilidades": ["Toma de decisiones", "Planificación", "Coordinación"],
       "amigo": "",
@@ -86,7 +86,7 @@
     {
       "id": "9",
       "nombre": "Bestiajez",
-      "apodo": "Bestiajez",
+      "apodo": " (Bestiajez) ",
       "especialidad": "Fuerza bruta",
       "habilidades": ["Fuerza", "Resistencia", "Agilidad"],
       "amigo": "",
@@ -95,7 +95,7 @@
     {
       "id": "10",
       "nombre": "Patrona",
-      "apodo": "Patrona",
+      "apodo": " (Patrona) ",
       "especialidad": "Agente encubierta",
       "habilidades": ["Cambios de apariencia", "Seducción", "Manejo de armas"],
       "amigo": "",
@@ -104,7 +104,7 @@
     {
       "id": "11",
       "nombre": "Agente Besuguio",
-      "apodo": "Besuguio",
+      "apodo": " (Besuguio) ",
       "especialidad": "Desastre total",
       "habilidades": ["Meteduras de pata", "Caídas accidentales", "Confusión constante"],
       "amigo": "",
@@ -113,7 +113,7 @@
     {
       "id": "12",
       "nombre": "Agente Borríquez",
-      "apodo": "Borríquez",
+      "apodo": " (Borríquez) ",
       "especialidad": "Torpeza extrema",
       "habilidades": ["Caídas constantes", "Desorientación total", "Destrucción involuntaria"],
       "amigo": "",
@@ -122,7 +122,7 @@
     {
       "id": "13",
       "nombre": "Agente Boñiguez",
-      "apodo": "Boñiguez",
+      "apodo": " (Boñiguez) ",
       "especialidad": "Olor fétido",
       "habilidades": ["Mal olor", "Repulsión involuntaria", "Confusión nasal"],
       "amigo": "",
