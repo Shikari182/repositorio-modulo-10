@@ -9,15 +9,17 @@
 <body>
     <div class="container">
         <h1>🕵️ Agentes de la T.I.A.</h1>
-        
-        <div class="search-box">
-            <input type="text" 
-                   id="searchInput" 
-                   placeholder="Busca por nombre, apodo o habilidad..."
-                   autocomplete="off">
-            <div id="loading" class="loading"></div>
-        </div>
-
+            <form class="contenedor-formulario" id="formulario">
+                <div class="grupo-formulario">
+                    <input 
+                        type="text" 
+                        id="busquedaInput"
+                        placeholder="Buscar personajes..."
+                        class="input-busqueda"
+                    >
+                    <button type="submit" class="boton-busqueda">Filtrar</button>
+                </div>
+            </form>    
         <div id="error" class="error-message"></div>
         <div id="results" class="results-grid"></div>
     </div>

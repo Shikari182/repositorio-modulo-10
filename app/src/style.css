@@ -113,3 +113,26 @@ body {
 .character-card p:not(:last-child) {
   margin-bottom: 6px; 
 }
+
+.grupo-formulario {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-busqueda {
+    padding: 8px;
+    flex-grow: 1;
+}
+
+.boton-busqueda {
+    padding: 8px 16px;
+    background-color: #04550b;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-busqueda:hover {
+    background-color: #00b33c;
+}
