@@ -29,7 +29,10 @@ document.addEventListener("DOMContentLoaded", iniciarAplicacion);
 
 const formularioBusqueda = document.getElementById("formulario");
 if (formularioBusqueda) {
-    formularioBusqueda.addEventListener("submit", manejarBusqueda);
+    formularioBusqueda.addEventListener("submit", (event) => {
+        event.preventDefault();
+        manejarBusqueda();
+    });
 };
 
 
